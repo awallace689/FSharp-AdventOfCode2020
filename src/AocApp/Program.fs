@@ -1,24 +1,44 @@
 open System
 open AocLib
 
-let internal printDay1() = 
+let internal printP1 day =
     printfn ""
     printfn "##################################"
-    printfn "###*********** DAY1 ***********###"
+
+    String.replicate (((-) 11) << String.length << string <| day) "*"
+    |> printfn "###*********** DAY %d %s###" day
+
     printfn "##################################"
     printfn ""
 
-let internal printDay1P2() = 
+let internal printP2 day =
     printfn ""
     printfn "##################################"
-    printfn "###******* DAY 1 PART 2 *******###"
+
+    String.replicate (((-) 8) << String.length << string <| day) "*"
+    |> printfn "###******* DAY %d PART 2 %s###" day
+
     printfn "##################################"
     printfn ""
+
+let printOutputWithMenu run1 run2 day =
+    printP1 day
+    run1 ()
+
+    match run2 with
+    | Some f ->
+        printP2 day
+        f ()
+    | _ -> ()
+
 
 [<EntryPoint>]
 let unit argv =
-    printDay1()
-    printfn "%d" Day1.run
-    printDay1P2()
-    printfn "%d" Day1P2.run 
+    printOutputWithMenu
+        (fun () -> printfn "%d" Day1.run) // 1
+        (Some(fun () -> printfn "%d" Day1P2.run))
+        1
+
+    printOutputWithMenu (fun () -> printfn "%s" Day2.run) None 2
+
     0

@@ -2,8 +2,6 @@ namespace AocLib
 
 open System
 open FSharp.Collections
-open System.Collections
-open System.Collections.Generic
 
 module Day1 =
     let rec internal solve st list =
