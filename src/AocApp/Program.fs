@@ -21,7 +21,7 @@ let internal printP2 day =
     printfn "##################################"
     printfn ""
 
-let printOutputWithMenu run1 run2 day =
+let internal printOutputWithMenu run1 run2 day =
     printP1 day
     run1 ()
 
