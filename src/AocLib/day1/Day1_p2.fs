@@ -13,9 +13,7 @@ module Day1P2 =
             else
                 solve x st ys
 
-    let rec forEachOutter list =
-        let st = Set.ofList list
-
+    let rec forEachOutter st list =
         match list with
         | [] -> 0
         | x :: xs ->
@@ -25,11 +23,12 @@ module Day1P2 =
             if (n1 + n2 + n3) = 2020 then
                 n1 * n2 * n3
             else
-                forEachOutter xs
+                forEachOutter st xs
 
     let internal parseAndSetup lines =
         let st = Seq.map int lines |> Set.ofSeq
-        forEachOutter st
+        let list = Set.toList st
+        forEachOutter st list
 
     let run =
         let lines = IO.File.ReadLines @"./input/day1.txt"
