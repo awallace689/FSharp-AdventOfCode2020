@@ -22,7 +22,6 @@ module Day1 =
 
     let run =
         let lines = IO.File.ReadLines @"./input/day1.txt"
-
         match lines with
         | lines when Seq.isEmpty lines -> failwith "bad input"
         | _ -> parseAndSetup lines
