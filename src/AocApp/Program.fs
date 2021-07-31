@@ -21,7 +21,7 @@ let internal printP2 day =
     printfn "##################################"
     printfn ""
 
-let internal printOutputWithMenu run1 run2 day =
+let internal printOutputWithBanner run1 run2 day =
     printP1 day
     run1 ()
 
@@ -34,11 +34,11 @@ let internal printOutputWithMenu run1 run2 day =
 
 [<EntryPoint>]
 let unit argv =
-    printOutputWithMenu
+    printOutputWithBanner
         (fun () -> printfn "%d" Day1.run) // 1
         (Some(fun () -> printfn "%d" Day1P2.run))
         1
 
-    printOutputWithMenu (fun () -> printfn "%s" Day2.run) None 2
+    printOutputWithBanner (fun () -> printfn "%s" Day2.run) None 2
 
     0
