@@ -21,11 +21,11 @@ let internal printP2 day =
     printfn "##################################"
     printfn ""
 
-let internal printOutputWithBanner run1 run2 day =
+let internal printOutputWithBanner runP1 runP2 day =
     printP1 day
-    run1 ()
+    runP1 ()
 
-    match run2 with
+    match runP2 with
     | Some f ->
         printP2 day
         f ()
@@ -35,10 +35,10 @@ let internal printOutputWithBanner run1 run2 day =
 [<EntryPoint>]
 let unit argv =
     printOutputWithBanner
-        (fun () -> printfn "%d" Day1.run) // 1
+        (fun () -> printfn "%d" Day1.run)
         (Some(fun () -> printfn "%d" Day1P2.run))
         1
 
-    printOutputWithBanner (fun () -> printfn "%s" Day2.run) None 2
+    printOutputWithBanner (fun () -> printfn "%A" Day2.run) None 2
 
     0
