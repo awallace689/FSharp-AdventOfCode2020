@@ -46,7 +46,7 @@ let unit argv =
 
     printOutputWithBanner 
         (fun () -> printfn "%d" Day3.run) 
-        None
+        (Some(fun () -> printfn "%d" Day3P2.run))
         3
 
     0
