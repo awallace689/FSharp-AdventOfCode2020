@@ -4,31 +4,28 @@ open System
 open System.Data
 open FSharp.Collections
 
-
-module Day2 =
-    type internal Range = int * int
-    type internal ParseResult = Char * Range * string
+module Day2P2 =
+    type internal Indeces = int * int
+    type internal ParseResult = Char * Indeces * string
 
     let internal parseLine (line: string) : ParseResult =
         let [ lhs: string; rhs: string ] = line.Split ':' |> Seq.toList
-        let [ rangeStr; charStr ] = lhs.Split ' ' |> Seq.toList
+        let [ indecesStr; charStr ] = lhs.Split ' ' |> Seq.toList
         let char = char charStr
-        let rangeAsStr = rangeStr.Split '-' |> Seq.toList
-        let range: Range = (int rangeAsStr.[0], int rangeAsStr.[1])
+        let indecesAsStr = indecesStr.Split '-' |> Seq.toList
+        let indeces: Indeces =
+            (int indecesAsStr.[0], int indecesAsStr.[1])
+
         let str = rhs.[1..]
-        (char, range, str)
+        (char, indeces, str)
 
     let internal solve lines =
         let parsedLines = Seq.map parseLine lines
 
         let validPasswords =
             Seq.filter
-                (fun ((char, (low, high), str): ParseResult) ->
-                    let numOccurences =
-                        (Seq.length << Seq.filter (fun c -> c = char)
-                         <| str)
-
-                    low <= numOccurences && numOccurences <= high)
+                (fun ((char, (index1, index2), str): ParseResult) ->
+                    (<>) (str.[index1 - 1] = char) (str.[index2 - 1] = char))
                 parsedLines
 
         Seq.length validPasswords
